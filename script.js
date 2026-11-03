@@ -24,12 +24,19 @@ console.log(deck[0], deck[1]);
 // console.log(a,b);
 
 const j = Math.floor(Math.random() * 52);
-console.log(j);
+// console.log(j);
 
-const temp = deck[0];
-deck[0] = deck[j];
-deck[j] = temp;
-console.log(deck[0], deck[j]);
+// const temp = deck[0];
+// deck[0] = deck[j];
+// deck[j] = temp;
+// console.log(deck[0], deck[j]);
 
 console.log(Math.floor(Math.random() * 52));
 
+for (let i = 0; i < deck.length; i++) {
+    const j = Math.floor(Math.random() * deck.length);
+    const temp = deck[i];
+    deck[i] = deck[j];
+    deck[j] = temp;
+}
+console.log(deck[0], deck[1], deck[2]);
