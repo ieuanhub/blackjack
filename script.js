@@ -15,6 +15,8 @@ for (let i = 0; i < deck.length; i++) {
     deck[j] = temp;
 }
 
+// drawing two cards for the player
+
 const playerHand = [];
 const card = deck.pop();
 playerHand.push(card);
@@ -22,4 +24,15 @@ const card2 = deck.pop();
 playerHand.push(card2);
 
 console.log(playerHand);
+console.log(deck.length);
+
+// drawing two cards for the dealer
+
+const dealerHand = [];
+const dealerCard = deck.pop();
+dealerHand.push(dealerCard);
+const dealerCard2 = deck.pop();
+dealerHand.push(dealerCard2);
+
+console.log(dealerHand);
 console.log(deck.length);
