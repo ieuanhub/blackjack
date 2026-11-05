@@ -36,3 +36,21 @@ dealerHand.push(dealerCard2);
 
 console.log(dealerHand);
 console.log(deck.length);
+
+function dealCard(hand) {
+  hand.push(deck.pop());
+}
+
+// value of the cards
+
+function cardValue(card) {
+  if (card.rank === "A") {
+    return 11;
+  }
+  else if (["J", "Q", "K"].includes(card.rank)) {
+  return 10;
+}
+else {
+    return Number(card.rank);
+}
+}
