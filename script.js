@@ -54,3 +54,15 @@ else {
     return Number(card.rank);
 }
 }
+
+// value of the hand
+
+function handValue(hand) {
+  let total = 0;
+  for (const card of hand) {
+    total = total + cardValue(card);
+}
+    return total;    
+}
+console.log(playerHand);
+console.log(handValue(playerHand));
