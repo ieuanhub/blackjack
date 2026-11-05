@@ -40,3 +40,14 @@ for (let i = 0; i < deck.length; i++) {
     deck[j] = temp;
 }
 console.log(deck[0], deck[1], deck[2]);
+
+const fruits = ["apple", "banana", "cherry"];
+const taken = fruits.pop();
+console.log(taken);
+console.log(fruits);
+console.log(fruits.length);
+
+console.log(deck.length);
+const card = deck.pop();
+console.log(card);
+console.log(deck.length);
