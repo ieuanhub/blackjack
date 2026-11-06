@@ -81,7 +81,7 @@ console.log(playerHand);                                                        
 console.log(handValue(playerHand));                                                         // log the value of the player's hand to the console
 console.log(handValue([{ suit: "♠", rank: "A" }, { suit: "♥", rank: "A" }]));               // log the value of a hand with two aces to the console
 
-// bust check 
+// bust check - check to see if the player has gone over 21
 
 function isBust(hand) {
     return handValue(hand) > 21;
@@ -114,3 +114,10 @@ while (!standing && !isBust(playerHand)) {
         standing = true;
     }
 }
+
+// dealer's turn - the dealer must hit until their hand is 17 or higher
+
+while (handValue(dealerHand) < 17) {
+    dealCard(dealerHand);
+}
+console.log(dealerHand, handValue(dealerHand));
