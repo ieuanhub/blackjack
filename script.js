@@ -121,3 +121,26 @@ while (handValue(dealerHand) < 17) {
     dealCard(dealerHand);
 }
 console.log(dealerHand, handValue(dealerHand));
+
+// winner check - check to see who won the game
+
+function getResult(playerHand, dealerHand) {
+    if (isBust(playerHand)) {
+        return "You busted! Dealer wins.";
+    }
+    else if (isBust(dealerHand)){
+        return "Dealer busted. You win!"
+    }
+    else if (handValue(playerHand) > handValue(dealerHand)){
+        return "You win!";
+    }
+    else if (handValue(dealerHand) > handValue(playerHand)){
+        return "Dealer wins.";
+    }
+    else {
+        return "Push."
+    }
+}
+
+console.log("player:", handValue(playerHand), "dealer:", handValue(dealerHand));
+console.log(getResult(playerHand, dealerHand));
