@@ -80,5 +80,11 @@ function handValue(hand) {                                                      
 console.log(playerHand);                                                                    // log the player's hand to the console
 console.log(handValue(playerHand));                                                         // log the value of the player's hand to the console
 console.log(handValue([{ suit: "♠", rank: "A" }, { suit: "♥", rank: "A" }]));               // log the value of a hand with two aces to the console
-console.log(handValue([{ suit: "♠", rank: "A" }, { suit: "♥", rank: "9" }, { suit: "♦", rank: "5" }]));
-console.log(handValue([{ suit: "♣", rank: "K" }, { suit: "♥", rank: "7" }]));
+
+// bust check 
+
+function isBust(hand) {
+    return handValue(hand) > 21;
+}
+console.log(isBust(playerHand));    
+console.log(isBust([{ suit: "♠", rank: "6" }, { suit: "♥", rank: "9" }, { suit: "♦", rank: "8" }]));  
