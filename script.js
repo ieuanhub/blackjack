@@ -42,35 +42,35 @@ console.log(dealerHand);                                                        
 console.log(deck.length);                                                                   // log the number of cards left in the deck to the console                                 
 
 function dealCard(hand) {                                                                   // function to deal a card to a hand
-  hand.push(deck.pop());                                                                    // remove the last card from the deck and add it to the hand
+    hand.push(deck.pop());                                                                    // remove the last card from the deck and add it to the hand
 }
 
 // value of the cards
 
 function cardValue(card) {                                                                  // function to get the value of a card
-  if (card.rank === "A") {                                                                  // if the card is an ace, return 11
-    return 11;
-  }
-  else if (["J", "Q", "K"].includes(card.rank)) {                                           // if the card is a jack, queen, or king, return 10
-  return 10;
-}
-else {
-    return Number(card.rank);                                                               // if the card is a number, return the number
-}
+    if (card.rank === "A") {                                                                  // if the card is an ace, return 11
+        return 11;
+    }
+    else if (["J", "Q", "K"].includes(card.rank)) {                                           // if the card is a jack, queen, or king, return 10
+        return 10;
+    }
+    else {
+        return Number(card.rank);                                                               // if the card is a number, return the number
+    }
 }
 
 // value of the hand
 
 function handValue(hand) {                                                                  // function to get the value of a hand
-  let total = 0;                                                                            // variable to hold the total value of the hand
-  let aces = 0;                                                                             // variable to hold the number of aces in the hand
+    let total = 0;                                                                            // variable to hold the total value of the hand
+    let aces = 0;                                                                             // variable to hold the number of aces in the hand
 
-  for (const card of hand) {                                                                // loop through each card in the hand
-    total = total + cardValue(card);                                                        // add the value of the card to the total
-    if (card.rank === "A") {                                                                // if the card is an ace, increment the number of aces
-        aces++;                                                                             // increment the number of aces
+    for (const card of hand) {                                                                // loop through each card in the hand
+        total = total + cardValue(card);                                                        // add the value of the card to the total
+        if (card.rank === "A") {                                                                // if the card is an ace, increment the number of aces
+            aces++;                                                                             // increment the number of aces
+        }
     }
-}
     while (total > 21 && aces > 0) {                                                        // while the total is greater than 21 and there are aces in the hand
         total -= 10;                                                                        // subtract 10 from the total (counting the ace as 1 instead of 11)
         aces--;                                                                             // decrement the number of aces
@@ -86,5 +86,31 @@ console.log(handValue([{ suit: "♠", rank: "A" }, { suit: "♥", rank: "A" }]))
 function isBust(hand) {
     return handValue(hand) > 21;
 }
-console.log(isBust(playerHand));    
-console.log(isBust([{ suit: "♠", rank: "6" }, { suit: "♥", rank: "9" }, { suit: "♦", rank: "8" }]));  
+console.log(isBust(playerHand));
+console.log(isBust([{ suit: "♠", rank: "6" }, { suit: "♥", rank: "9" }, { suit: "♦", rank: "8" }]));
+
+// asking the player hit or stand
+
+function hitOrStand(answer, hand) {
+    if (answer === "hit") {
+        dealCard(hand);
+        console.log(hand);
+        console.log(handValue(hand));
+    }
+    else if (answer === "stand") {
+        console.log("You chose to stand.");
+    }
+    else {
+        console.log("Invalid input. Please enter 'hit' or 'stand'.");
+    }
+}
+
+let standing = false;
+
+while (!standing && !isBust(playerHand)) {
+    const answer = prompt("Hit or stand?");
+    hitOrStand(answer, playerHand);
+    if (answer === "stand") {
+        standing = true;
+    }
+}
