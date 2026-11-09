@@ -2,22 +2,35 @@
 
 const suits = ["♠", "♥", "♦", "♣"];                                                         // spades, hearts, diamonds, clubs
 const ranks = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];           // ace, 2-10, jack, queen, king
-const deck = [];                                                                            // empty array to hold the deck of cards
 
-for (const suit of suits) {                                                                 // loop through each suit
-    for (const rank of ranks) {                                                             // loop through each rank
-        deck.push({ suit: suit, rank: rank });                                              // push an object with the suit and rank into the deck array
+function createDeck() {                                                                     // function to build a fresh 52 card deck
+    const deck = [];                                                                        // empty array to hold the deck of cards
+
+    for (const suit of suits) {                                                             // loop through each suit
+        for (const rank of ranks) {                                                         // loop through each rank
+            deck.push({ suit: suit, rank: rank });                                          // push an object with the suit and rank into the deck array
+        }
     }
+
+    return deck;                                                                            // hand the finished deck back to whoever called the function
 }
+
+const deck = createDeck();                                                                  // build a deck and store it in the deck variable
+console.log(deck.length);                                                                   // should log 52
 
 // shuffling the deck
 
+function shuffle(deck) {                                                                    // function to shuffle a deck
+    
 for (let i = 0; i < deck.length; i++) {                                                     // loop through each card in the deck, (i is the index of the current card, deck.length is the total number of cards in the deck, i++ increases the index by 1 each time the loop runs, eg, if the deck has 52 cards, the loop will run 52 times, with i starting at 0 and ending at 51)
     const j = Math.floor(Math.random() * deck.length);                                      // generate a random index between 0 and the length of the deck (deck.length is 52, so j will be a random number between 0 and 51, math.floor rounds the number down to the nearest whole number, so if Math.random() generates 0.5, j will be 0, if Math.random() generates 0.9, j will be 0, if Math.random() generates 1.5, j will be 1, etc)
     const temp = deck[i];                                                                   // store the current card in a temporary variable
     deck[i] = deck[j];                                                                      // replace the current card with the card at the random index   
     deck[j] = temp;                                                                         // replace the card at the random index with the current card
 }
+}
+
+shuffle(deck);  
 
 // drawing two cards for the player
 
@@ -144,3 +157,5 @@ function getResult(playerHand, dealerHand) {
 
 console.log("player:", handValue(playerHand), "dealer:", handValue(dealerHand));
 console.log(getResult(playerHand, dealerHand));
+
+// reset the game - reset the deck, player hand, and dealer hand - without refreshing the page
