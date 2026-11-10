@@ -87,6 +87,19 @@ function isValidBet(bet, balance) {                                             
     return true;
 }
 
+// asking the player for a valid bet
+
+function askForBet(balance) {                                                               // function to ask the player for a valid bet
+    let bet = Number(prompt("How much do you want to bet? " + balance));                    // ask once, and turn the text into a number
+
+    while (!isValidBet(bet, balance)) {                                                     // while the bet is NOT valid                                                                           // while the bet is NOT valid
+    alert("Invalid bet. Please enter a number between 1 and " + balance);                   // tell the player the bet was invalid
+    bet = Number(prompt("How much do you want to bet? You have " + balance));               // ask again and overwrite bet
+    }
+
+    return bet;                                                                             // hand the valid bet back
+}
+
 // asking the player hit or stand
 
 function hitOrStand(answer, deck, hand) {                                                   // function to act on the player's answer
