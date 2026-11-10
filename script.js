@@ -72,6 +72,21 @@ function isBust(hand) {                                                         
     return handValue(hand) > 21;                                                            // true if the hand is worth more than 21
 }
 
+// adding currency for the player to bet with
+
+function isValidBet(bet, balance) {                                                          // function to check if a bet is valid
+    if (isNaN(bet)) {                                                                        // if the bet is not a number
+        return false;                                                                        // return false
+    }
+    if (bet <= 0) {
+        return false;
+    }
+    if (bet > balance) {
+        return false;
+    }
+    return true;
+}
+
 // asking the player hit or stand
 
 function hitOrStand(answer, deck, hand) {                                                   // function to act on the player's answer
