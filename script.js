@@ -77,6 +77,12 @@ function isBust(hand) {                                                         
     return handValue(hand) > 21;                                                            // true if the hand is worth more than 21
 }
 
+// blackjack check - check to see if a hand is a natural blackjack
+
+function isBlackjack(hand) {                                                                // function to check if a hand is a natural blackjack
+    return hand.length === 2 && handValue(hand) === 21;                                     // true only if the hand has exactly 2 cards AND is worth exactly 21
+}
+
 // money - the game stores money in pence (whole numbers) and only shows pounds on screen
 
 function formatMoney(pence) {                                                               // function to turn pence into a pounds string for display
@@ -285,4 +291,4 @@ function startGame() {                                                          
     console.log("Game over. You finished with", formatMoney(balance));                      // show what they ended with
 }
 
-// startGame();                                                                             // start the game
+startGame();                                                                                // start the game
