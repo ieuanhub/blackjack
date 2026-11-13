@@ -247,7 +247,11 @@ function playRound() {                                                          
 
     let standing = false;                                                                   // has the player stood yet?
 
-    while (!standing && !isBust(playerHand)) {                                              // keep going until they stand or bust
+    if (isBlackjack(playerHand)) {                                                          // if the player was dealt a natural blackjack
+        console.log("Blackjack!");                                                          // tell them, and the loop below will be skipped
+    }
+
+    while (!standing && !isBust(playerHand) && !isBlackjack(playerHand)) {                  // keep going until they stand, bust, or have blackjack
         const answer = prompt("Hit or stand?");                                             // ask the player
         hitOrStand(answer, deck, playerHand);                                               // act on their answer
         if (answer === "stand") {                                                           // if they stood
