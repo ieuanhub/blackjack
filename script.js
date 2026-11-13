@@ -77,6 +77,12 @@ function isBust(hand) {                                                         
     return handValue(hand) > 21;                                                            // true if the hand is worth more than 21
 }
 
+// blackjack check - check to see if a hand is a natural blackjack
+
+function isBlackjack(hand) {                                                                // function to check if a hand is a natural blackjack
+    return hand.length === 2 && handValue(hand) === 21;                                     // true only if the hand has exactly 2 cards AND is worth exactly 21
+}
+
 // money - the game stores money in pence (whole numbers) and only shows pounds on screen
 
 function formatMoney(pence) {                                                               // function to turn pence into a pounds string for display
@@ -194,7 +200,10 @@ function getResult(playerHand, dealerHand) {                                    
 // payout check - work out how much the balance changes
 
 function getPayout(playerHand, dealerHand, bet) {                                           // function to work out the change in money (in pence)
-    if (isBust(playerHand)) {                                                               // player busted
+    if (isBlackjack(playerHand) && !isBlackjack(dealerHand)) {                              // player has a natural blackjack and the dealer doesn't (checked first, so the normal win rules can't catch it)
+        return bet * 1.5;                                                                   // they win 1.5 times their bet (3:2)
+    }
+    else if (isBust(playerHand)) {                                                          // player busted
         return -bet;                                                                        // they lose their bet (the minus makes it negative)
     }
     else if (isBust(dealerHand)) {                                                          // dealer busted
@@ -263,7 +272,7 @@ function playRound() {                                                          
     return true;                                                                            // the round finished normally
 }
 
-// the game - deposit, then keep playing rounds until the player runs out of money or quits
+// the game - deposit, then keep playing rounds until the player runs out of money or  just straight up quits
 
 function startGame() {                                                                      // function to run the whole game
     const deposit = askForDeposit();                                                        // ask how much they want to play with
