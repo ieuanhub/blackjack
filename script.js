@@ -295,4 +295,24 @@ function startGame() {                                                          
     console.log("Game over. You finished with", formatMoney(balance));                      // show what they ended with
 }
 
-// startGame();                                                                                // start the game
+//  the page: the START button 
+
+const depositInput = document.getElementById("depositInput");                               // the box the player types their deposit into
+const introError = document.getElementById("introError");                                   // where the error message goes
+const balanceEl = document.getElementById("balance");                                       // the balance text in the header
+
+function startGameFromPage() {                                                              // runs when START is clicked
+    const deposit = poundsToPence(Number(depositInput.value));                              // what they typed (pounds), turned into pence
+    if (!isValidAmount(deposit)) {                                                          // your existing check
+        introError.textContent = "Enter an amount like 50 or 12.50";                        // textContent sets the text inside an element
+        return;                                                                             // stop here
+    }
+    introError.textContent = "";                                                            // clear any old error
+    balance = deposit;                                                                      // set the balance to what they typed
+    balanceEl.textContent = formatMoney(balance);                                           // show the balance in the header
+    document.body.classList.add("game-started");    
+}
+
+document.getElementById("startButton").addEventListener("click", startGameFromPage);       // when START is clicked, run the function
+
+// startGame();                                                                             // start the game

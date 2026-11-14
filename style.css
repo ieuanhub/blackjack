@@ -310,3 +310,18 @@ h1 {
     background: rgba(201, 164, 76, 0.15);
     transform: rotate(45deg);
 }
+
+.game-screen {
+    position: fixed;
+    inset: 0;
+    background: #050908;                                                                    
+    transform: translateY(-110%);                                                           
+    transition: transform 1s ease;
+}
+
+body.game-started .game-screen {
+    transform: translateY(0);                                                               
+}
+
+#depositInput { margin-top: 40px; padding: 10px; width: 160px; text-align: center; font-size: 18px; }
+#introError { height: 20px; margin-top: 8px; color: #e57373; font-size: 14px; }
