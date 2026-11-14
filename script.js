@@ -310,9 +310,28 @@ function startGameFromPage() {                                                  
     introError.textContent = "";                                                            // clear any old error
     balance = deposit;                                                                      // set the balance to what they typed
     balanceEl.textContent = formatMoney(balance);                                           // show the balance in the header
-    document.body.classList.add("game-started");    
+    document.body.classList.add("game-started");
 }
 
 document.getElementById("startButton").addEventListener("click", startGameFromPage);       // when START is clicked, run the function
+
+// ---------- drawing cards ----------
+
+function cardHTML(card) {                                                                   // function to build the HTML for one face-up card
+    let colourClass;                                                                        // will hold "red-card" or "black-card"
+    if (["♥", "♦"].includes(card.suit)) {                                                   // if the card's suit is hearts or diamonds
+        colourClass = "red-card";                                                           // it's a red card
+    }
+    else {
+        colourClass = "black-card";                                                         // otherwise it's black
+    }
+
+    return `<div class="playing-card ${colourClass}">
+        <div class="card-top"><span>${card.rank}</span><span>${card.suit}</span></div>
+        <div class="card-centre">${card.suit}</div>
+        <div class="card-bottom"><span>${card.rank}</span><span>${card.suit}</span></div>
+    </div>`;
+}
+document.getElementById("playerCards").innerHTML = cardHTML({ suit: "♠", rank: "K" });     // put a test card on the table
 
 // startGame();                                                                             // start the game

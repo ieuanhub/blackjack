@@ -1,3 +1,11 @@
+/* ==========================================================
+   ROYAL BLACKJACK - style.css
+   Sections: 1 General | 2 Intro | 3 Game screen | 4 Table
+             5 Bet spots | 6 Chips | 7 Cards | 8 Misc
+   ========================================================== */
+
+
+/* ---------- 1. GENERAL ---------- */
 
 * {
     margin: 0;
@@ -7,7 +15,9 @@
 
 body {
     background-color: #080d0e;
+    color: #e8e2d0;                                                                         /* light text, so nothing is black-on-dark */
     text-align: center;
+    overflow: hidden;
 }
 
 h1 {
@@ -19,9 +29,11 @@ h1 {
     text-shadow: 0 0 15px rgba(201, 164, 76, 0.25);
 }
 
+
+/* ---------- 2. INTRO SCREEN ---------- */
+
 .intro-screen {
     background-color: #15201c;
-    color: white;
     min-height: 100vh;
     display: flex;
     justify-content: center;
@@ -62,8 +74,23 @@ h1 {
     background-color: #c9a44c;
 }
 
+#depositInput {
+    margin-top: 40px;
+    padding: 10px;
+    width: 160px;
+    text-align: center;
+    font-size: 18px;
+}
+
+#introError {
+    height: 20px;
+    margin-top: 8px;
+    color: #e57373;
+    font-size: 14px;
+}
+
 .start-button {
-    margin-top: 60px;
+    margin-top: 30px;
     padding: 15px 55px;
     background-color: transparent;
     border: 1px solid #c9a44c;
@@ -88,181 +115,120 @@ h1 {
     letter-spacing: 3px;
 }
 
+
+/* ---------- 3. GAME SCREEN (slides in when body has "game-started") ---------- */
+
 .game-screen {
     position: fixed;
     inset: 0;
-    transform: translateY(0%);
+    padding-top: 45px;                                                                      /* room for the header above the table */
+    background: #050908;
+    transform: translateY(-110%);                                                           /* hidden above the screen to start with */
+    transition: transform 1s ease;
 }
+
+body.game-started .game-screen {
+    transform: translateY(0);
+}
+
+.game-header {
+    position: absolute;
+    top: 12px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 30px;
+    font-size: 13px;
+    letter-spacing: 1px;
+    color: #c9a44c;
+}
+
+.settings-button {
+    position: absolute;
+    top: 25px;
+    right: 30px;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #c9a44c;
+    font-size: 24px;
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(201, 164, 76, 0.5);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.settings-button:hover {
+    background: rgba(201, 164, 76, 0.15);
+    transform: rotate(45deg);
+}
+
+
+/* ---------- 4. THE TABLE ---------- */
 
 .table {
     width: 90%;
     max-width: 1200px;
-    height: 70vh;
-    border-radius: 50%;
+    height: 78vh;
+    margin: 0 auto;
     position: relative;
-
-    background: radial-gradient(
-        ellipse at center,
-        #087044 0%,
-        #075638 65%,
-        #043d29 100%
-    );
-
+    border-radius: 50%;
     border: 18px solid #59351f;
-
-    box-shadow:
-        0 25px 60px rgba(0, 0, 0, 0.6),
-        inset 0 0 15px rgba(0, 0, 0, 0.5);
-
     outline: 2px solid #c9a44c;
     outline-offset: 5px;
-
-    margin: 0 auto;
+    background: radial-gradient(ellipse at center, #087044 0%, #075638 65%, #043d29 100%);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), inset 0 0 15px rgba(0, 0, 0, 0.5);
 }
 
-.table::before {
+.table::before {                                                                            /* the wood rail behind the border */
     content: "";
     position: absolute;
     inset: -18px;
     border-radius: inherit;
     z-index: -1;
-
-    background: linear-gradient(
-        135deg,
-        #754728,
-        #3d2417,
-        #754728
-    );
+    background: linear-gradient(135deg, #754728, #3d2417, #754728);
 }
 
-.table-branding {
+.table-branding {                                                                           /* the writing at the top of the felt */
     position: absolute;
-    top: 8%;
+    top: 4%;
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
-}
-
-.dealer-area {
-    position: absolute;
-    top: 25%;
-    left: 50%;
-    transform: translateX(-50%);
-    text-align: center;
-}
-
-.betting-spots {
-    position: absolute;
-    top: 58%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-
-    width: 80%;
-}
-
-.bet-spot {
-    width: 150px;
-    height: 150px;
-    border: 2px solid rgba(201, 164, 76, 0.6);
-    border-radius: 50%;
-    box-shadow: 0 0 12px rgba(201, 164, 76, 0.12);
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.bet-label {
     color: #c9a44c;
-    font-size: 16px;
-    letter-spacing: 3px;
-    font-weight: 600;
+    white-space: nowrap;
 }
 
-.side-bets {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    color: rgba(255, 255, 255, 0.65);
-    font-size: 10px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-}
+.table-brand { font-size: 12px; letter-spacing: 5px; }
+.table-branding h2 { font-size: 26px; font-weight: 400; letter-spacing: 6px; }
+.table-vegas { display: none; }                                                             /* hidden for now, it made the top too crowded */
+.table-rules { font-size: 13px; letter-spacing: 2px; margin-top: 4px; }
+.dealer-rules { font-size: 11px; opacity: 0.8; }
 
-.chip-selector {
+.dealer-area {                                                                              /* dealer's label and cards */
     position: absolute;
-    bottom: 8%;
+    top: 19%;
     left: 50%;
     transform: translateX(-50%);
+    font-size: 13px;
+    letter-spacing: 3px;
+}
 
+.player-area {                                                                              /* player's cards */
+    position: absolute;
+    top: 43%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.card-container {
     display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-.chip {
-    width: 65px;
-    height: 65px;
-    border-radius: 50%;
-
-    box-shadow:
-        inset 0 0 0 5px rgba(255, 255, 255, 0.12),
-        0 5px 10px rgba(0, 0, 0, 0.5);
-
-    transition: transform 0.2s ease;
-    position: relative;
-    overflow: hidden;
-
-    border: 4px dashed rgba(255, 255, 255, 0.8);
-
-    color: white;
-    font-size: 14px;
-    font-weight: 600;
-
-    cursor: pointer;
-}
-
-.chip:hover {
-    transform: translateY(-6px);
-}
-
-.chip.selected {
-    outline: 2px solid #f5d77a;
-    outline-offset: 4px;
-
-    box-shadow:
-        inset 0 0 0 5px rgba(255, 255, 255, 0.12),
-        0 5px 12px rgba(0, 0, 0, 0.5),
-        0 0 18px rgba(201, 164, 76, 0.45);
-}
-
-.chip-red {
-    background-color: #c62828;
-}
-
-.chip-purple {
-    background-color: #7136a8;
-}
-
-.chip-black {
-    background-color: #252525;
-}
-
-.chip-green {
-    background-color: #168044;
-}
-
-.chip-blue {
-    background-color: #1764b5;
-}
-
-.chip-gold {
-    background-color: #c9a44c;
+    justify-content: center;
+    min-height: 115px;
 }
 
 .current-bet {
@@ -270,7 +236,6 @@ h1 {
     bottom: 3%;
     left: 50%;
     transform: translateX(-50%);
-
     color: rgba(255, 255, 255, 0.7);
     font-size: 14px;
     letter-spacing: 2px;
@@ -283,45 +248,138 @@ h1 {
     margin-left: 5px;
 }
 
-.settings-button {
+
+/* ---------- 5. BET SPOTS ---------- */
+
+.betting-spots {
     position: absolute;
-    top: 25px;
-    right: 30px;
-
-    width: 45px;
-    height: 45px;
-
+    top: 73%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70%;
     display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.bet-spot {
+    width: 120px;
+    height: 120px;
+    border: 2px solid rgba(201, 164, 76, 0.6);
+    border-radius: 50%;
+    box-shadow: 0 0 12px rgba(201, 164, 76, 0.12);
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+}
 
+.bet-label {
     color: #c9a44c;
-    font-size: 24px;
+    font-size: 14px;
+    letter-spacing: 3px;
+    font-weight: 600;
+}
 
-    background: rgba(0, 0, 0, 0.35);
-    border: 1px solid rgba(201, 164, 76, 0.5);
+.side-bets {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    margin-top: 6px;
+    color: rgba(255, 255, 255, 0.65);
+    font-size: 8px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+
+/* ---------- 6. CHIPS ---------- */
+
+.chip-selector {
+    position: absolute;
+    bottom: 7%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.chip {
+    width: 52px;
+    height: 52px;
     border-radius: 50%;
-
+    border: 4px dashed rgba(255, 255, 255, 0.8);
+    box-shadow: inset 0 0 0 5px rgba(255, 255, 255, 0.12), 0 5px 10px rgba(0, 0, 0, 0.5);
+    color: white;
+    font-size: 12px;
+    font-weight: 600;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: transform 0.2s ease;
 }
 
-.settings-button:hover {
-    background: rgba(201, 164, 76, 0.15);
-    transform: rotate(45deg);
+.chip:hover { transform: translateY(-6px); }
+
+.chip.selected {
+    outline: 2px solid #f5d77a;
+    outline-offset: 4px;
+    box-shadow: inset 0 0 0 5px rgba(255, 255, 255, 0.12), 0 5px 12px rgba(0, 0, 0, 0.5), 0 0 18px rgba(201, 164, 76, 0.45);
 }
 
-.game-screen {
-    position: fixed;
-    inset: 0;
-    background: #050908;                                                                    
-    transform: translateY(-110%);                                                           
-    transition: transform 1s ease;
+.chip-red { background-color: #c62828; }
+.chip-purple { background-color: #7136a8; }
+.chip-black { background-color: #252525; }
+.chip-green { background-color: #168044; }
+.chip-blue { background-color: #1764b5; }
+.chip-gold { background-color: #c9a44c; }
+
+
+/* ---------- 7. CARDS ---------- */
+
+.playing-card {
+    width: 80px;
+    height: 115px;
+    padding: 7px;
+    position: relative;
+    border-radius: 8px;
+    background: #f8f5ed;
+    border: 1px solid #d6d0c3;
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.4);
 }
 
-body.game-started .game-screen {
-    transform: translateY(0);                                                               
+.card-container .playing-card:not(:first-child) {                                           /* cards overlap a little */
+    margin-left: -22px;
 }
 
-#depositInput { margin-top: 40px; padding: 10px; width: 160px; text-align: center; font-size: 18px; }
-#introError { height: 20px; margin-top: 8px; color: #e57373; font-size: 14px; }
+.card-top,
+.card-bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 1;
+}
+
+.card-bottom {
+    position: absolute;
+    bottom: 7px;
+    right: 7px;
+    transform: rotate(180deg);
+}
+
+.card-centre {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 34px;
+}
+
+.red-card { color: #c62828; }
+.black-card { color: #222; }
+
+
+/* ---------- 8. MISC ---------- */
+
+[hidden] { display: none !important; }                                                      /* makes the HTML "hidden" attribute work on buttons */
