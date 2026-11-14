@@ -26,7 +26,7 @@
     </section>
 
     <!-- GAME SCREEN -->
-     <main class="game-screen" id="gameScreen"></main>
+     <main class="game-screen" id="gameScreen">
 
      <!-- TOP CORNER INFORMATION -->
       <header class="game-header">
@@ -84,10 +84,56 @@
                     <spam>21+3</spam>
                 </div>
             </div>
-            
+
           </div>
         
+        <!-- PLAYER CARDS -->
+            <div class="player-area">
+                <div class="card-container" id="playerCards">
+                </div>
+            </div>
+        
+         <!-- CHIP SELECTION -->
+            <div class="chip-selector">
+
+                <button class="chip chip-red" data-value="10">
+                    0.10
+                </button>
+
+                <button class="chip chip-purple" data-value="50">
+                    0.50
+                </button>
+
+                <button class="chip chip-black selected" data-value="100">
+                    1
+                </button>
+
+                <button class="chip chip-green" data-value="200">
+                    2
+                </button>
+
+                <button class="chip chip-blue" data-value="500">
+                    5
+                </button>
+
+                <button class="chip chip-gold" data-value="1000">
+                    10
+                </button>
+
+            </div>
+
+            <div class="current-bet">
+                CURRENT BET: <span id="currentBet">£0.00</span>
+            </div>
+
        </section>
 
+        <!-- TABLE CONTROLS -->
+        <div class="settings-button">
+            ⚙
+        </div>
+
+    </main>
+    
 </body>
 </html>
