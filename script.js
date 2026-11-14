@@ -295,4 +295,4 @@ function startGame() {                                                          
     console.log("Game over. You finished with", formatMoney(balance));                      // show what they ended with
 }
 
-startGame();                                                                                // start the game
+// startGame();                                                                                // start the game
