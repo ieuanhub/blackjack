@@ -1,0 +1,22 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #080d0e;
+    text-align: center;
+}
+
+h1 {
+    color:gold;
+    font-size: 60px;
+    letter-spacing: 5px;
+}
+
+.intro-screen {
+    background-color: #15201c;
+    color: white;
+    min-height: 100vh;
+}
