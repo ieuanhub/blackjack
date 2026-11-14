@@ -11,12 +11,84 @@ body {
 
 h1 {
     color:gold;
-    font-size: 60px;
+    font-size: clamp(32px, 8vw, 60px);
     letter-spacing: 5px;
+    font-weight: 400;
+    text-transform: uppercase;
+    text-shadow: 0 0 15px rgba(201, 164, 76, 0.25);
 }
 
 .intro-screen {
     background-color: #15201c;
     color: white;
     min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+}
+
+.game-screen {
+    position: fixed;
+    inset: 0;
+    transform: translateY(-110%);
+}
+
+.intro-content {
+    width: 90%;
+    max-width: 750px;
+}
+
+.intro-content h1 {
+    margin-bottom: 20px;
+}
+
+.intro-name {
+    color: #c9a44c;
+    font-size: 18px;
+    letter-spacing: 8px;
+    margin-bottom: 12px;
+}
+
+.intro-subtitle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    color: #c9a44c;
+    letter-spacing: 5px;
+    font-size: 13px;
+}
+
+.intro-subtitle span {
+    width: 60px;
+    height: 1px;
+    background-color: #c9a44c;
+}
+
+.start-button {
+    margin-top: 60px;
+    padding: 15px 55px;
+    background-color: transparent;
+    border: 1px solid #c9a44c;
+    color: #c9a44c;
+    font-size: 14px;
+    letter-spacing: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.start-button:hover {
+    background-color: #c9a44c;
+    color: #080d0e;
+    box-shadow: 0 0 25px rgba(201, 164, 76, 0.35);
+}
+
+.intro-footer {
+    position: absolute;
+    bottom: 25px;
+    color: #777;
+    font-size: 11px;
+    letter-spacing: 3px;
 }
