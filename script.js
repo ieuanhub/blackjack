@@ -350,15 +350,21 @@ function handHTML(hand, hideSecond) {                                           
     return html;
 }
 
-const testDeck = createDeck();                                                              // a deck just for testing
-shuffle(testDeck);
-const playerTest = [];                                                                      // a hand each
-const dealerTest = [];
-dealCard(testDeck, playerTest);
-dealCard(testDeck, dealerTest);
-dealCard(testDeck, playerTest);
-dealCard(testDeck, dealerTest);
-document.getElementById("playerCards").innerHTML = handHTML(playerTest);                    // both player cards face up
-document.getElementById("dealerCards").innerHTML = handHTML(dealerTest, true);              // dealer's second card face down
+// ---------- betting ----------
 
+let selectedChip = 100;                                                                     // value of the highlighted chip in pence (starts as the £1 chip)
+let bet = 0;                                                                                // the current bet in pence
+
+const chipButtons = document.querySelectorAll(".chip");                                     // finds every element with the class "chip" (gives a list of them)
+
+for (const chipButton of chipButtons) {                                                     // loop through every chip button
+    chipButton.addEventListener("click", function () {                                      // when this chip is clicked...
+        for (const otherChipButton of chipButtons) {                                        // loop through every chip button again
+            otherChipButton.classList.remove("selected");                                    // remove the "selected" class from every chip button
+        }
+        chipButton.classList.add("selected");                                               // add the "selected" class to the chip that was clicked
+        selectedChip = Number(chipButton.dataset.value);                                    // set selectedChip to the chip's value
+        console.log("selected chip:", selectedChip);                                        // so you can see it working in the console
+    });
+}
 // startGame();                                                                             // start the game
