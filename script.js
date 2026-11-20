@@ -332,6 +332,20 @@ function cardHTML(card) {                                                       
         <div class="card-bottom"><span>${card.rank}</span><span>${card.suit}</span></div>
     </div>`;
 }
-document.getElementById("playerCards").innerHTML = cardHTML({ suit: "♠", rank: "K" });     // put a test card on the table
+
+function handHTML(hand) {                                                                   // function to build the HTML for a whole hand of cards
+    let html = "";                                                                          // start with an empty string
+    for (const card of hand) {                                                              // loop through each card in the hand
+        html = html + cardHTML(card);                                                       // add the HTML for this card to the string
+    }
+    return html;                                                                            // hand back all the cards joined together
+}
+
+const testDeck = createDeck();                                                              // a deck just for testing
+shuffle(testDeck);                                                                          // shuffle it
+const testHand = [];                                                                        // an empty hand
+dealCard(testDeck, testHand);                                                               // deal two cards into it
+dealCard(testDeck, testHand);
+document.getElementById("playerCards").innerHTML = handHTML(testHand);                      // draw the hand on the table
 
 // startGame();                                                                             // start the game
