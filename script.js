@@ -367,4 +367,21 @@ for (const chipButton of chipButtons) {                                         
         console.log("selected chip:", selectedChip);                                        // so you can see it working in the console
     });
 }
+
+const betEl = document.getElementById("currentBet");                                        // the CURRENT BET text on the table
+const activeSpot = document.querySelector(".active-spot");                                  // querySelector finds the first match: the middle bet circle
+
+function addToBet(value) {                                                                  // function to add a chip's value to the bet
+    if (bet + value > balance) {                                                            // if the new bet would be more than the balance...
+        alert("You can't bet more than you have!");
+        return;
+    }
+    bet += value;                                                                           // otherwise, add value onto bet
+    betEl.textContent = formatMoney(bet);                                                   // show it on the page: betEl.textContent = formatMoney(bet)
+}
+
+activeSpot.addEventListener("click", function () {                                          // when the middle circle is clicked...
+    addToBet(selectedChip);                                                                 // ...add the selected chip to the bet
+});
+
 // startGame();                                                                             // start the game
