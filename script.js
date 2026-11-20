@@ -317,6 +317,10 @@ document.getElementById("startButton").addEventListener("click", startGameFromPa
 
 // ---------- drawing cards ----------
 
+function cardBackHTML() {                                                                   // function to build the HTML for a face-down card
+    return `<div class="playing-card card-back"></div>`;                                    // same size as a card, but with the back design
+}
+
 function cardHTML(card) {                                                                   // function to build the HTML for one face-up card
     let colourClass;                                                                        // will hold "red-card" or "black-card"
     if (["♥", "♦"].includes(card.suit)) {                                                   // if the card's suit is hearts or diamonds
@@ -333,19 +337,28 @@ function cardHTML(card) {                                                       
     </div>`;
 }
 
-function handHTML(hand) {                                                                   // function to build the HTML for a whole hand of cards
-    let html = "";                                                                          // start with an empty string
-    for (const card of hand) {                                                              // loop through each card in the hand
-        html = html + cardHTML(card);                                                       // add the HTML for this card to the string
+function handHTML(hand, hideSecond) {                                                       // hideSecond is true when the 2nd card should be face down
+    let html = "";
+    for (let i = 0; i < hand.length; i++) {                                                 // i counts the position of each card
+        if (hideSecond && i === 1) {                                                             // if hideSecond is true AND this is the second card
+            html += cardBackHTML();                                                          // add the back of a card to html
+        }
+        else {
+            html += cardHTML(hand[i]);                                                        // add the HTML for this card to the string
+        }
     }
-    return html;                                                                            // hand back all the cards joined together
+    return html;
 }
 
 const testDeck = createDeck();                                                              // a deck just for testing
-shuffle(testDeck);                                                                          // shuffle it
-const testHand = [];                                                                        // an empty hand
-dealCard(testDeck, testHand);                                                               // deal two cards into it
-dealCard(testDeck, testHand);
-document.getElementById("playerCards").innerHTML = handHTML(testHand);                      // draw the hand on the table
+shuffle(testDeck);
+const playerTest = [];                                                                      // a hand each
+const dealerTest = [];
+dealCard(testDeck, playerTest);
+dealCard(testDeck, dealerTest);
+dealCard(testDeck, playerTest);
+dealCard(testDeck, dealerTest);
+document.getElementById("playerCards").innerHTML = handHTML(playerTest);                    // both player cards face up
+document.getElementById("dealerCards").innerHTML = handHTML(dealerTest, true);              // dealer's second card face down
 
 // startGame();                                                                             // start the game
